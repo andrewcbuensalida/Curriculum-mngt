@@ -1,15 +1,11 @@
 import "./Spinner.css";
 
-const Spinner = ({loadSpinner}) => {
-  return (
-    (loadSpinner === true)?
+const Spinner = ({ loadSpinner }) => {
+  return loadSpinner === true ? (
     <div className="spinner-container">
-      <div className="loading-spinner">
-
-      </div>
+      <div className="loading-spinner"></div>
     </div>
-    : null
-  )
-}
+  ) : null;
+};
 
-export default Spinner
+export default Spinner;

@@ -1,23 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
 
-*{
+* {
   box-sizing: border-box;
-  font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+  font-family: "Quicksand", Arial, Helvetica, sans-serif;
 }
-.App{
+.App {
   background-color: black;
   color: white;
   margin-top: 10px;
   min-height: 100vh;
 }
-.course-title{
+.course-title {
   background-color: black;
-  padding:10px;
-  margin:10px;
+  padding: 10px;
+  margin: 10px;
   border-radius: 10px;
   color: white;
 }
-.course-title > a{
+.course-title > a {
   text-decoration: none;
   color: white;
   cursor: pointer;
