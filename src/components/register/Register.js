@@ -81,7 +81,7 @@ const Register = () => {
       <main className="register-container">
         <div className="register-layout">
           <Form onSubmit={postData}>
-            <Form.Group className="mb-2" controlId="formBasicName">
+            <Form.Group className="mb-2" >
               <Form.Label>
                 Name:
                 <span className={validName ? "valid" : "hide"}>
@@ -101,7 +101,7 @@ const Register = () => {
                 required
               />
             </Form.Group>
-            <Form.Group className="mb-2" controlId="formBasicUserName">
+            <Form.Group className="mb-2" >
               <Form.Label>
                 Username:
                 <span className={validUserName ? "valid" : "hide"}>
@@ -120,7 +120,7 @@ const Register = () => {
                 required
               />
             </Form.Group>
-            <Form.Group className="mb-2" controlId="formBasicPassword">
+            <Form.Group className="mb-2" >
               <Form.Label>
                 Password:
                 <span className={validPwd ? "valid" : "hide"}>
@@ -139,7 +139,7 @@ const Register = () => {
                 required
               />
             </Form.Group>
-            <Form.Group className="mb-2" controlId="formBasicConfirmPassword">
+            <Form.Group className="mb-2" >
               <Form.Label>
                 Confirm Password:
                 <span className={validMatch && matchPwd ? "valid" : "hide"}>

@@ -1,3 +1,5 @@
+Have to run spring boot locally to get data from neo4j aura.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
