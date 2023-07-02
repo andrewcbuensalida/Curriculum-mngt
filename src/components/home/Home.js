@@ -13,33 +13,44 @@ const Home = () => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const [courseData, setCourseData] = useState();
+	const [usersData, setUsersData] = useState();
 
 	const axiosPrivate = useAxiosPrivate();
 
 	const fetchCourses = async () => {
-		setIsLoading(true);
 		const response = await axiosPrivate.get("/api/v1/courses/");
-
 		const cData = response.data;
-
 		setCourseData(cData);
-		setIsLoading(false);
 	};
+
+	const fetchUsers = async () => {
+		const response = await axiosPrivate.get("/api/v1/users/");
+		const usersData = response.data;
+		setUsersData(usersData);
+	};
+
 	useEffect(() => {
 		if (auth?.user) {
-			fetchCourses();
+			setIsLoading(true);
+			try {
+				fetchCourses();
+				fetchUsers();
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setIsLoading(false);
+			}
 		}
 	}, []);
-
 	return (
 		<>
 			<Spinner loadSpinner={isLoading} />
 			<main className="container">
 				{!auth?.user ? (
 					<img src={HeroImage} alt="HeroImage" />
-				) : courseData ? (
+				) : courseData && usersData ? (
 					<>
-						<Force courseData={courseData} />
+						<Force courseData={courseData} usersData={usersData} />
 						{courseData.map((d) => {
 							return (
 								<div key={d.identifier} className="card mt-2">

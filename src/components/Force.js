@@ -9,10 +9,8 @@ import {
 } from "d3";
 import useForce, { MANY_BODY_STRENGTH } from "../hooks/useForce";
 
-function Force({ courseData }) {
-	const { nodes, links } = useForce(courseData);
-  // console.log(`This is nodes: `, nodes)
-  // console.log(`This is links: `, links)
+function Force({ courseData, usersData }) {
+	const { nodes, links } = useForce({ courseData, usersData });
 	const svgRef = useRef(null);
 
 	// will be called initially and on every data change
@@ -34,7 +32,7 @@ function Force({ courseData }) {
 		const dragInteraction = drag().on("drag", (event, node) => {
 			node.fx = event.x;
 			node.fy = event.y;
-			simulation.alpha(1);
+			simulation.alpha(0.5);
 			simulation.restart();
 		});
 
@@ -63,10 +61,24 @@ function Force({ courseData }) {
 			.attr("alignment-baseline", "middle")
 			.attr("fill", "white")
 			.style("pointer-events", "none")
-			.text((node) => node.title.slice(0,16));
+			.text(
+				(node) => node.name?.slice(0, 16) || node.title?.slice(0, 16) // users have names, courses and lessons have titles
+			);
 
 		simulation.on("tick", () => {
-			circles.attr("cx", (node) => node.x).attr("cy", (node) => node.y);
+			circles
+				.attr("cx", function (d) { // to keep it within the borders
+					return (d.x = Math.max(
+						d.size,
+						Math.min(width - d.size, d.x)
+					));
+				})
+				.attr("cy", function (d) {
+					return (d.y = Math.max(
+						d.size,
+						Math.min(height - d.size, d.y)
+					));
+				});
 			text.attr("x", (node) => node.x).attr("y", (node) => node.y);
 
 			lines
@@ -77,7 +89,7 @@ function Force({ courseData }) {
 		});
 	}, [svgRef]);
 
-	return <svg id="container" width="960" height="960" ref={svgRef}></svg>;
+	return <svg id="container" width="960" height="700" ref={svgRef}></svg>;
 }
 
 export default Force;
