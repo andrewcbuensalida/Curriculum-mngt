@@ -8,7 +8,7 @@ import { AuthProvider } from "./context/AuthProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode> // this causes double render
     <AuthProvider>
       <BrowserRouter>
         <Routes>
@@ -16,5 +16,5 @@ root.render(
         </Routes>
       </BrowserRouter>
     </AuthProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
